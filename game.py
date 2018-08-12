@@ -118,4 +118,5 @@ class Game:
         Count the number of points in cards, where cards is a list of Cards.
         """
         # TODO: implement "shoot the moon"
-        return sum(card_points(card) for card in cards)
+        score_for_round = sum(card_points(card) for card in cards)
+        return score_for_round

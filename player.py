@@ -39,9 +39,15 @@ class StupidPlayer(Player):
     Most simple player you can think of.
     It just plays random valid cards.
     """
+    def __init__(self, id):
+        self.id = id
+        print("Player's ID is {}".format(self.id))
 
     def pass_cards(self, hand):
-        return hand[:3]
+        print("\n\n\n Stupid player {} All Cards in hand: \n {}".format(self.id, hand))
+        passed_cards = hand[:3]
+        print("[Card Passed] Card Passed to others: \n {}".format(passed_cards))
+        return passed_cards
 
     def play_card(self, hand, trick, trick_nr, are_hearts_broken):
         # Play first card that is valid
@@ -60,7 +66,8 @@ class SimplePlayer(Player):
     It will try to get rid of the most undesirable cards while trying not to win a trick.
     """
 
-    def __init__(self, verbose=False):
+    def __init__(self, id, verbose=False):
+        self.id = id
         self.verbose = verbose
         if verbose:
             deck = Deck()
@@ -80,8 +87,11 @@ class SimplePlayer(Player):
         )
 
     def pass_cards(self, hand):
+        print("\n\n\n player {} All Cards in hand \n {}".format(self.id, hand))
         hand.sort(key=self.undesirability, reverse=True)
-        return hand[:3]
+        passed_cards = hand[:3]
+        print("[Card Passed] Card Passed to others: \n {}".format(passed_cards))
+        return passed_cards
 
     def play_card(self, hand, trick, trick_nr, are_hearts_broken):
         # Lead with a low card
